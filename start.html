@@ -1,19 +1,30 @@
+<style>
+    h1{background-color: gray;
+    padding: 20px;
+    margin: 20px;
+    }
+    input{
+        color: orange;
+    }
+    button{
+        font-size: 30px;
+    }
+
+</style>
+
+
 <script>
     function func(){
-    var inputstring = document.getElementById("invoer").value;
-    if (inputstring == "eens"){
-        document.getElementById("titleid").innerHTML = "Ik ben het ermee eens";
-        document.getElementById("titleid").style.backgroundColor = 'green';
-    }else{
-        document.getElementById("titleid").innerHTML = "Ik ben het ermee oneens";
-        document.getElementById("titleid").style.backgroundColor = 'red';
+    var hetwoord = document.getElementById("invoer").value
+    for(var x = 0; x < hetwoord.length; x++){
+        console.log(hetwoord.charAt(x));
+        if(hetwoord.charAt(x) == "e"){
+            alert("er zit een e in")
+        }
     }
     }
 </script>
 
 
-
-<h1 id = "titleid"> Titel </h1>
-<input type = text id = "invoer" onkeyup = func()></input>
-<!-- <input type = button value = "Submit Answer" onclick = func()></input> -->
-Ben je het ermee eens?
+<input type = text id = "invoer"></input>
+<button onclick = func()> Check </button>
