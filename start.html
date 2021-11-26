@@ -15,13 +15,15 @@
 
 <script>
     function func(){
-    var hetwoord = document.getElementById("invoer").value
-    for(var x = 0; x < hetwoord.length; x++){
-        console.log(hetwoord.charAt(x));
-        if(hetwoord.charAt(x) == "e"){
-            alert("er zit een e in")
+        var aantal = 0;
+        var hetwoord = document.getElementById("invoer").value
+        for(var x = 0; x < hetwoord.length; x++){
+            console.log(hetwoord.charAt(x));
+            if(hetwoord.charAt(x) == "e"){
+                aantal += 1;
+            }
         }
-    }
+        alert("er zit "+ aantal +" keer een e in")
     }
 </script>
 
