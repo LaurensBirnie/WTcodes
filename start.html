@@ -1,13 +1,19 @@
 <script>
-    function func(parameter){
-    console.log(parameter+2);
+    function func(){
+    var inputstring = document.getElementById("invoer").value;
+    if (inputstring == "eens"){
+        document.getElementById("titleid").innerHTML = "Ik ben het ermee eens";
+        document.getElementById("titleid").style.backgroundColor = 'green';
+    }else{
+        document.getElementById("titleid").innerHTML = "Ik ben het ermee oneens";
+        document.getElementById("titleid").style.backgroundColor = 'red';
+    }
     }
 </script>
 
 
 
-
-<strong> start! </strong>
-extra tekst <br>
-<input type = button value = "Klik" onclick = func(23)></input>
-<input type = button value = "Klik" onclick = func(3)></input>
+<h1 id = "titleid"> Titel </h1>
+<input type = text id = "invoer" onkeyup = func()></input>
+<!-- <input type = button value = "Submit Answer" onclick = func()></input> -->
+Ben je het ermee eens?
