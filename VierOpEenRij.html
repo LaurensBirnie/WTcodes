@@ -2,7 +2,7 @@
     div{
         background-color: white;
         border: 4px solid black;
-        display: inline-block;
+        display: none;
         width: 40px;
         height: 40px;
         margin-top: 2px;
@@ -40,25 +40,99 @@
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
-    ]
+    ];
+    var player = 0;
+    var playercolor = ['red', 'Yellow'];
+    var playername = ["Player 1", "Player 2"]
+
+    function hide_gamefield(){
+        var divs = document.getElementsByTagName("div");
+        for(x = 0; x < divs.length; x++){
+            divs[x].style.display = "none";
+        }
+    }
+    
+    function show_gamefield(){
+        var divs = document.getElementsByTagName("div");
+        for(x = 0; x < divs.length; x++){
+            divs[x].style.display = "inline-block";
+        }
+    }
+
+    function displaycolorselection(PID){
+        if(PID == 0){
+            selectcolor = document.getElementById("color0").value;
+            if(selectcolor == 'red'){
+                document.getElementById("color1").value = 'yellow';
+            }else{
+                document.getElementById("color1").value = 'red';
+            }
+        }else if(PID == 1){
+            selectcolor = document.getElementById("color1").value;
+            if(selectcolor == 'red'){
+                document.getElementById("color0").value = 'yellow';
+            }else{
+                document.getElementById("color0").value = 'red';
+            }
+        }
+    }
+
+    function confirmselect(){
+        playername[0] = document.getElementById("player0").value;
+        playername[1] = document.getElementById("player1").value;
+        playercolor[0] = document.getElementById("color0").value;
+        playercolor[1] = document.getElementById("color1").value;
+        document.getElementById("player0").readOnly = true;
+        document.getElementById("player1").redOnly = true;
+        document.getElementById("color0").disabled = true;
+        document.getElementById("color1").disabled = true;
+        document.getElementById("confirmbutton").disabled = true;
+        show_gamefield();
+    }
 
     function drop(col){
         for(x = 0; x < 6; x += 1){
             if(board[x][col] != 0){
-                board[x-1][col] = 1;
-                document.getElementById(col.toString()+(x-1).toString()).style.backgroundColor='red';
+                board[x-1][col] = player+1;
+                document.getElementById(col.toString()+(x-1).toString()).style.backgroundColor=playercolor[player];
                 break;
             }else if(x == 5 && board[x][col] == 0){
-                board[x][col] = 1;
-                document.getElementById(col.toString()+x.toString()).style.backgroundColor='red';
+                board[x][col] = player+1;
+                document.getElementById(col.toString()+x.toString()).style.backgroundColor=playercolor[player];
                 break;
             }
+        }
+        endturn();
+    }
+
+    function endturn(){
+        if(player == 0){
+            player = 1;
+        }else if(player == 1){
+            player = 0;
         }
     }
 </script>
 
+<p>
+Select name and color Player 1: 
+<input type=text id="player0" value="Player 1"></input>
+<select id="color0" onchange="displaycolorselection(0)">
+    <option selected value='red' id="red0">Red</option>
+    <option value='yellow' id="yellow0">Yellow</option>
+</select>
+<br>
+Select name and color Player 2: 
+<input type=text id="player1" value="Player 2"></input>
+<select id="color1" onchange="displaycolorselection(1)">
+    <option value='red' id="red1">Red</option>
+    <option selected value='yellow' id="yellow1">Yellow</option>
+</select>
+<br>
+<button id="confirmbutton" onclick="confirmselect()">Confirm selection and start game</button>
+</p>
 
-<div class="column0" id="00" onclick="drop(0)"> a</div>
+<div hidden class="column0" id="00" onclick="drop(0)"> a</div>
 <div class="column1" id="10" onclick="drop(1)"> a</div>
 <div class="column2" id="20" onclick="drop(2)"> a</div>
 <div class="column3" id="30" onclick="drop(3)"> a</div>
