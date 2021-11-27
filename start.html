@@ -1,32 +1,21 @@
 <style>
-    h1{background-color: gray;
-    padding: 20px;
-    margin: 20px;
-    }
-    input{
-        color: orange;
-    }
-    button{
-        font-size: 30px;
-    }
+div{
+    border: 2px solid red;
+}
 
 </style>
 
-
 <script>
-    function func(){
-        var aantal = 0;
-        var hetwoord = document.getElementById("invoer").value
-        for(var x = 0; x < hetwoord.length; x++){
-            console.log(hetwoord.charAt(x));
-            if(hetwoord.charAt(x) == "e"){
-                aantal += 1;
-            }
-        }
-        alert("er zit "+ aantal +" keer een e in")
+    function press(knop){
+        console.log(knop);
+        document.getElementById("output").innerHTML += knop;
     }
 </script>
 
 
-<input type = text id = "invoer"></input>
-<button onclick = func()> Check </button>
+
+<button onclick = "press('a')">A</button>
+<button onclick = "press('b')">B</button>
+<button onclick = "press('c')">C</button>
+<button onclick = "press('d')">D</button>
+<div id="output"></div>
