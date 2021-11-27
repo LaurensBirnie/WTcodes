@@ -102,7 +102,70 @@
                 break;
             }
         }
+        checkwin();
+        checkfullcol(col);
         endturn();
+    }
+
+    function checkwin(){
+        var hw = horizontalwin();
+        var vw = verticalwin();
+        console.log(hw)
+        console.log(vw)
+    }
+
+    function horizontalwin(){
+        for(y = 0; y < 6; y++){
+            var numberinarow = 0;
+            var idinarow = 0;
+            var win = false;
+            for(x = 0; x < 7; x++){
+                if(board[y][x] == idinarow){
+                    numberinarow++;
+                    if(numberinarow == 4 && idinarow != 0){
+                        win = true;
+                        return win;
+                    }
+                }else{
+                    idinarow = board[y][x];
+                    numberinarow = 1;
+                }
+            }
+        }
+        return win;
+    }
+
+    function verticalwin(){
+        for(x = 0; x < 7; x++){
+            var numberinarow = 0;
+            var idinarow = 0;
+            var win = false;
+            for(y = 0; y < 6; y++){
+                if(board[y][x] == idinarow){
+                    numberinarow++;
+                    if(numberinarow == 4 && idinarow != 0){
+                        win = true;
+                        return win;
+                    }
+                }else{
+                    idinarow = board[y][x];
+                    numberinarow = 1;
+                }
+            }
+        }
+        return win;
+    }
+
+    function checkfullcol(col){
+        zerocount = 0;
+        for(x = 0; x < 6; x++){
+            if(board[x][col] == 0){
+                zerocount++
+            }
+        }
+        if(zerocount == 0){
+            disablecol(col)
+        }
     }
 
     function endturn(){
@@ -110,6 +173,12 @@
             player = 1;
         }else if(player == 1){
             player = 0;
+        }
+    }
+
+    function disablecol(col){
+        for(x = 0; x < 6; x++){
+                document.getElementById(col.toString()+x.toString()).style.pointerEvents = 'none';
         }
     }
 </script>
@@ -132,7 +201,7 @@ Select name and color Player 2:
 <button id="confirmbutton" onclick="confirmselect()">Confirm selection and start game</button>
 </p>
 
-<div hidden class="column0" id="00" onclick="drop(0)"> a</div>
+<div class="column0" id="00" onclick="drop(0)"> a</div>
 <div class="column1" id="10" onclick="drop(1)"> a</div>
 <div class="column2" id="20" onclick="drop(2)"> a</div>
 <div class="column3" id="30" onclick="drop(3)"> a</div>
